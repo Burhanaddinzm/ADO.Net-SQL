@@ -71,13 +71,12 @@ void Get()
     string Name = Console.ReadLine();
 
     sqlConnection.Open();
-    SqlCommand command = new SqlCommand("SELECT * FROM Category", sqlConnection);
+    SqlCommand command = new SqlCommand($"SELECT * FROM Category Where Name='{Name}'", sqlConnection);
     SqlDataReader reader = command.ExecuteReader();
 
     while (reader.Read())
     {
-        if (Name == reader["Name"])
-            Console.WriteLine($"Id:{reader["Id"]} Name:{reader["Name"]}");
+        Console.WriteLine($"Id:{reader["Id"]} Name:{reader["Name"]}");
     }
     sqlConnection.Close();
 }
@@ -113,8 +112,6 @@ void App()
         ShowMenu();
         request = int.Parse(Console.ReadLine());
     }
-
-
 }
 
 void ShowMenu()
